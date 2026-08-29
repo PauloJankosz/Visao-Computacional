@@ -60,12 +60,6 @@ def dog_kernel(size=15, sigma1=2.0, sigma2=3.2):
     return normalize_kernel(kernel)
 
 
-def sobel_kernels():
-    kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
-    ky = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]], dtype=np.float32)
-    return [normalize_kernel(kx), normalize_kernel(ky)]
-
-
 def gaussian_mean_kernel(size=15, sigma=2.0):
     g1 = cv2.getGaussianKernel(size, sigma)
     kernel = g1 @ g1.T
@@ -84,7 +78,7 @@ def build_filter_bank():
         filters.append(
             Filter(
                 name=f"gabor{angle:03d}",
-                label=f"Gabor {angle} graus",
+                label=f"Gabor {angle} deg",
                 kernels=[even, odd],
                 mode="energy",
             )
@@ -110,17 +104,17 @@ def build_filter_bank():
 
     filters.append(
         Filter(
-            name="grad",
-            label="Gradiente Sobel",
-            kernels=sobel_kernels(),
-            mode="magnitude",
+            name="log2",
+            label="LoG coarse",
+            kernels=[log_kernel(sigma=2.8)],
+            mode="abs",
         )
     )
 
     filters.append(
         Filter(
             name="media",
-            label="Media local",
+            label="Local mean",
             kernels=[gaussian_mean_kernel()],
             mode="linear",
         )

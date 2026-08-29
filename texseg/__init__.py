@@ -1,1 +1,1 @@
-__all__ = ["dataset", "filters", "features"]
+__all__ = ["dataset", "filters", "features", "kmeans", "visualize", "pipeline"]

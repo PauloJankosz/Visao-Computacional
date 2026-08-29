@@ -64,7 +64,7 @@ def dimension_names(filters=None):
     return names
 
 
-def extract_features(image, filters=None, window=WINDOW):
+def extract_features(image, filters=None, window=WINDOW, with_maps=False):
     if filters is None:
         filters = build_filter_bank()
 
@@ -72,13 +72,18 @@ def extract_features(image, filters=None, window=WINDOW):
     pyramid = build_pyramid(image)
 
     channels = []
-    for level_image in pyramid:
+    maps = {}
+    for scale, level_image in enumerate(pyramid):
         for filt in filters:
             response = apply_filter(level_image, filt)
             window_means = mean_per_window(response, grid_size)
             channels.append(window_means)
+            if with_maps:
+                maps[f"e{scale}_{filt.name}"] = response
 
     vectors = np.stack(channels, axis=-1)
+    if with_maps:
+        return vectors, maps
     return vectors
 
 
