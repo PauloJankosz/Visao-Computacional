@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+
+data/clips/*
+!data/clips/.gitkeep
+results/*
+!results/.gitkeep
+
+*.pt
