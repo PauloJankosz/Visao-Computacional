@@ -1,12 +1,11 @@
 __pycache__/
 *.pyc
 .venv/
-venv/
-.vscode/
-
+.pytest_cache/
+*.pt
+runs/
 data/clips/*
 !data/clips/.gitkeep
+data/annotations/private_*
 results/*
 !results/.gitkeep
-
-*.pt

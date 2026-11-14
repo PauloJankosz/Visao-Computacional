@@ -1,0 +1,5 @@
+{
+  "_ATENCAO": "PONTOS ILUSTRATIVOS. NAO SAO MEDIDAS DE UMA RODOVIA REAL. NUNCA USAR COMO CALIBRACAO REAL.",
+  "image_points": [[100, 100], [500, 100], [500, 320], [100, 320]],
+  "world_points_m": [[0, 0], [20, 0], [20, 40], [0, 40]]
+}
